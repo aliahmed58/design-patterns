@@ -7,12 +7,39 @@ import adapter.Json;
 import adapter.JsonToXmlAdapter;
 import adapter.Xml;
 import builder.User;
+import observer.Subject;
+import observer.ViewOne;
+import observer.ViewTwo;
+import scenario.ConfigurationManager;
+
+import javax.swing.text.View;
 
 public class Main {
   public static void main(String[] args) {
     // testBuilderPattern();
     // testAdapterPattern();
-    testDecoratorPattern();
+//    testDecoratorPattern();
+//    testConfigurationManager();
+    testObserverPattern();
+  }
+public static void testObserverPattern() {
+    Subject subject = new Subject();
+    ViewOne one = new ViewOne(subject);
+    ViewTwo two = new ViewTwo(subject);
+
+    subject.setSate(one);
+    subject.setSate(two);
+    subject.setSate(one);
+
+  }
+
+  public static void testConfigurationManager() {
+    ConfigurationManager configurationManager = ConfigurationManager.getInstance();
+    configurationManager.addConfiguration("name", "Something");
+    configurationManager.addConfiguration("test", false);
+
+    System.out.println(configurationManager.getConfiguration("name"));
+    System.out.println(configurationManager.getConfiguration("test"));
   }
 
   public static void testAdapterPattern() {
